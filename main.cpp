@@ -14,7 +14,7 @@ int main()
 
   
   //read first name text file to buffer
-  fstream firstname ("firstname.txt", ifstream::in);
+  ifstream firstname ("firstname.txt", ifstream::in);
   if (firstname)
     {
       firstname.seekg(0, firstname.end);
@@ -46,7 +46,7 @@ int main()
 	}
     }
   
-  fstream lastname("lastname.txt", ifstream::in);
+  ifstream lastname("lastname.txt", ifstream::in);
   if (lastname)
     {
       lastname.seekg(0, lastname.end);
@@ -80,8 +80,39 @@ int main()
 
   cout << "first " << spaceCountFirst << endl;
   cout << "last " << spaceCountLast << endl;
+
+  //split string into tokens
+  char* tokenFirst[spaceCountFirst];
+  int i = 1;
+  tokenFirst[0] = strtok (bufferFirst, " ");
   
-  //char* fName[spaceCount];
+  while (tokenFirst[i] != NULL)
+    {
+      tokenFirst[i] = strtok(NULL, " ");
+      i = i + 1;
+    }
+ 
+  char* tokenLast[spaceCountLast];
+  int j = 1;
+  tokenLast[0] = strtok (bufferLast, " ");
+
+  for (int i = 0; i < spaceCountFirst; i++)
+    {
+      cout << tokenFirst[i] << endl;
+    }
+
+  while (tokenLast[j] != NULL)
+    {
+      tokenLast[j] = strtok(NULL, " ");
+      j = j + 1;
+    }
+  
+  for (int j = 0; j < spaceCountLast; j++)
+    {
+      cout << tokenLast[j] << endl;
+    }
+  
+
 
   return 0;
 }
