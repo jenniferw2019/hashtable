@@ -2,6 +2,10 @@
 #include <fstream>
 #include <cstring>
 #include <cctype>
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
+#include "student.h"
 
 using namespace std;
 
@@ -83,36 +87,82 @@ int main()
 
   //split string into tokens
   char* tokenFirst[spaceCountFirst];
-  int i = 1;
+  int i = 0;
   tokenFirst[0] = strtok (bufferFirst, " ");
   
   while (tokenFirst[i] != NULL)
     {
+      i = i+1;
       tokenFirst[i] = strtok(NULL, " ");
-      i = i + 1;
+   
     }
- 
-  char* tokenLast[spaceCountLast];
-  int j = 1;
-  tokenLast[0] = strtok (bufferLast, " ");
-
+  
   for (int i = 0; i < spaceCountFirst; i++)
     {
       cout << tokenFirst[i] << endl;
     }
 
+  
+  char* tokenLast[spaceCountLast];
+  int j = 0;
+  tokenLast[0] = strtok (bufferLast, " ");
+  
   while (tokenLast[j] != NULL)
     {
-      tokenLast[j] = strtok(NULL, " ");
       j = j + 1;
+      tokenLast[j] = strtok(NULL, " ");
+    
     }
   
   for (int j = 0; j < spaceCountLast; j++)
     {
       cout << tokenLast[j] << endl;
     }
+
+  bool runProgram = true;
+  char strInput[10];
+  int students = 0;
+  int tempID = 0;
+  srand(time(NULL));
   
+  while (runProgram == true)
+    {
+      cout << "Type ADD" << endl;
+      cin.get(strInput, 10);
+      cin.get();
 
+      if (strcmp(strInput, "ADD") == 0)
+	{
+	  cout << "How many students? Enter an int value" << endl;
+	  cin >> students;
+	  cin.get();
 
+	  for (int i = 0; i < students; i++)
+	    {
+	      Student* newStudent = new Student();
+	      int totalStudents = 5;
+	      int generateFirst = 0;
+	      int generateLast = 0;
+	      float generateGPA = 0;
+
+	      //srand(time(NULL));
+	      generateFirst = rand() % totalStudents;
+	      generateLast = rand() % totalStudents;
+	      generateGPA = ((float)rand()) / (float(RAND_MAX/4));
+	      cout << generateFirst << endl;
+	      cout << generateLast << endl;
+	      tempID = tempID + 1;
+	      
+	      newStudent->setFirstName(tokenFirst[generateFirst]);
+	      newStudent->setLastName(tokenLast[generateLast]);
+	      newStudent->setID(tempID);
+	      newStudent->setGPA(generateGPA);
+	      newStudent->displayStudent();
+	      
+	      
+	    }
+	}
+  
+      }
   return 0;
 }
