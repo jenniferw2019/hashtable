@@ -47,3 +47,4 @@ void Student::displayStudent()
   cout <<fixed<<setprecision(2)<< gpa << endl;
 }
 
+Student::~Student() {}

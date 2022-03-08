@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <ctime>
 #include "student.h"
+#include "node.h"
+#include "hash.h"
 
 using namespace std;
 
@@ -30,7 +32,7 @@ int main()
       firstname.read(bufferFirst, lengthFirst);
 
       bufferFirst[lengthFirst - 1] = '\0';
-      cout << bufferFirst << endl;
+      //cout << bufferFirst << endl;
       
       firstname.close();
       
@@ -62,7 +64,7 @@ int main()
       lastname.read(bufferLast, lengthLast);
 
       bufferLast[lengthLast - 1] = '\0';
-      cout << bufferLast << endl;
+      //cout << bufferLast << endl;
 
       lastname.close();
       
@@ -82,8 +84,8 @@ int main()
 	}
     }
 
-  cout << "first " << spaceCountFirst << endl;
-  cout << "last " << spaceCountLast << endl;
+  //cout << "first " << spaceCountFirst << endl;
+  //cout << "last " << spaceCountLast << endl;
 
   //split string into tokens
   char* tokenFirst[spaceCountFirst];
@@ -96,12 +98,12 @@ int main()
       tokenFirst[i] = strtok(NULL, " ");
    
     }
-  
+  /*
   for (int i = 0; i < spaceCountFirst; i++)
     {
       cout << tokenFirst[i] << endl;
     }
-
+  */
   
   char* tokenLast[spaceCountLast];
   int j = 0;
@@ -113,13 +115,16 @@ int main()
       tokenLast[j] = strtok(NULL, " ");
     
     }
-  
+  /*
   for (int j = 0; j < spaceCountLast; j++)
     {
       cout << tokenLast[j] << endl;
     }
+  */
 
   bool runProgram = true;
+  int hashSize = 4;
+  HashTable* myHashTable = new HashTable(hashSize);
   char strInput[10];
   int students = 0;
   int tempID = 0;
@@ -127,7 +132,7 @@ int main()
   
   while (runProgram == true)
     {
-      cout << "Type ADD" << endl;
+      cout << "Type ADD, PRINT" << endl;
       cin.get(strInput, 10);
       cin.get();
 
@@ -136,7 +141,7 @@ int main()
 	  cout << "How many students? Enter an int value" << endl;
 	  cin >> students;
 	  cin.get();
-
+	  
 	  for (int i = 0; i < students; i++)
 	    {
 	      Student* newStudent = new Student();
@@ -149,8 +154,8 @@ int main()
 	      generateFirst = rand() % totalStudents;
 	      generateLast = rand() % totalStudents;
 	      generateGPA = ((float)rand()) / (float(RAND_MAX/4));
-	      cout << generateFirst << endl;
-	      cout << generateLast << endl;
+	      //cout << generateFirst << endl;
+	      //cout << generateLast << endl;
 	      tempID = tempID + 1;
 	      
 	      newStudent->setFirstName(tokenFirst[generateFirst]);
@@ -158,9 +163,14 @@ int main()
 	      newStudent->setID(tempID);
 	      newStudent->setGPA(generateGPA);
 	      newStudent->displayStudent();
-	      
-	      
+
+	      Node* studentNode = new Node(newStudent);
+	      myHashTable->insertHashTable(studentNode);
 	    }
+	}
+      if (strcmp(strInput, "PRINT") == 0)
+	{
+	  myHashTable->printHashTable();
 	}
   
       }
