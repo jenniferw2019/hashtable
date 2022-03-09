@@ -62,6 +62,41 @@ void HashTable::printHashTable()
 	      (current->getStudent())->displayStudent();
 	      current = current->getNext();
 	    }
+	  cout << endl;
+	}
+    }
+}
+
+void HashTable::deleteHashTable(int searchID)
+{
+  int tempv = hashValue(searchID);
+
+  if (hashData[tempv] != NULL)
+    {
+      Node* current = hashData[tempv];
+      Node* previous;
+      
+      if ((hashData[tempv]->getStudent())->getID() == searchID)
+	{
+	  Node* temp = hashData[tempv];
+	  hashData[tempv] = hashData[tempv]->getNext();
+	  delete temp;
+	}
+      else
+	{
+	  while (current->getNext() != NULL)
+	    {
+	      previous = current;
+	      current = current->getNext();
+
+	      if ((current->getStudent()->getID()) == searchID)
+		{
+		  Node* temp = current->getNext();
+		  previous->setNext(temp);
+		  delete current;
+		  break;
+		}
+	    }
 	}
     }
 }

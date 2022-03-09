@@ -128,11 +128,12 @@ int main()
   char strInput[10];
   int students = 0;
   int tempID = 0;
+  int deleteID = 0;
   srand(time(NULL));
   
   while (runProgram == true)
     {
-      cout << "Type ADD, PRINT" << endl;
+      cout << "Type ADD, PRINT, DELETE" << endl;
       cin.get(strInput, 10);
       cin.get();
 
@@ -162,7 +163,7 @@ int main()
 	      newStudent->setLastName(tokenLast[generateLast]);
 	      newStudent->setID(tempID);
 	      newStudent->setGPA(generateGPA);
-	      newStudent->displayStudent();
+	      //newStudent->displayStudent();
 
 	      Node* studentNode = new Node(newStudent);
 	      myHashTable->insertHashTable(studentNode);
@@ -171,6 +172,14 @@ int main()
       if (strcmp(strInput, "PRINT") == 0)
 	{
 	  myHashTable->printHashTable();
+	}
+      if (strcmp(strInput, "DELETE") == 0)
+	{
+	  cout << "Type id of student you want to delete" << endl;
+	  cin >> deleteID;
+	  cin.get();
+
+	  myHashTable->deleteHashTable(deleteID);
 	}
   
       }

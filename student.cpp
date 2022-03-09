@@ -44,7 +44,7 @@ void Student::displayStudent()
   cout << firstName << " ";
   cout << lastName << ", ";
   cout << id << ", ";
-  cout <<fixed<<setprecision(2)<< gpa << endl;
+  cout <<fixed<<setprecision(2)<< gpa << "; ";
 }
 
 Student::~Student() {}
