@@ -133,7 +133,7 @@ int main()
   
   while (runProgram == true)
     {
-      cout << "Type ADD, PRINT, DELETE" << endl;
+      cout << "Type ADD, PRINT, DELETE, RESIZE" << endl;
       cin.get(strInput, 10);
       cin.get();
 
@@ -167,19 +167,24 @@ int main()
 
 	      Node* studentNode = new Node(newStudent);
 	      myHashTable->insertHashTable(studentNode);
+	      //myHashTable->reHashTable();
 	    }
 	}
-      if (strcmp(strInput, "PRINT") == 0)
+      else if (strcmp(strInput, "PRINT") == 0)
 	{
 	  myHashTable->printHashTable();
 	}
-      if (strcmp(strInput, "DELETE") == 0)
+      else if (strcmp(strInput, "DELETE") == 0)
 	{
 	  cout << "Type id of student you want to delete" << endl;
 	  cin >> deleteID;
 	  cin.get();
 
 	  myHashTable->deleteHashTable(deleteID);
+	}
+      else if (strcmp(strInput, "RESIZE") == 0)
+	{
+	  myHashTable->reHashTable();
 	}
   
       }

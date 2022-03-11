@@ -17,6 +17,7 @@ class HashTable
   void insertHashTable(Node* nStudent);
   void printHashTable();
   void deleteHashTable(int searchID);
+  void reHashTable();
   ~HashTable();
 
  private:

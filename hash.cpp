@@ -100,4 +100,41 @@ void HashTable::deleteHashTable(int searchID)
 	}
     }
 }
+
+void HashTable::reHashTable()
+{
+  Node** oldHash = hashData;
+  int oldsize = size;
+  
+  size = oldsize * 2;
+  hashData = new Node*[size];
+  for (int i = 0; i < size; i++)
+    {
+      hashData[i] = NULL;
+    }
+  for (int i = 0; i < oldsize; i++)
+    {
+      //Node* current = oldHash[i];
+      //Node* previous;
+      
+      if (oldHash[i] != NULL)
+	{
+	  Node* tempHead = oldHash[i];
+	  oldHash[i] = oldHash[i]->getNext();
+	  tempHead->setNext(NULL);
+	  insertHashTable(tempHead);
+	  //cout << (tempHead->getStudent())->getID() << endl;
+	  
+	  while (oldHash[i] != NULL)
+	    {
+	      Node* tempHead = oldHash[i];
+	      oldHash[i] = oldHash[i]->getNext();
+	      tempHead->setNext(NULL);
+	      insertHashTable(tempHead);
+	      //cout << (tempHead->getStudent())->getID() << endl;
+	    }
+	}
+    }
+}
+
 HashTable::~HashTable() {}
