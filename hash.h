@@ -13,6 +13,7 @@ class HashTable
   HashTable(int newSize);
   int getSize();
   void setSize(int addSize);
+  int getCollision();
   int hashValue(int newID);
   void insertHashTable(Node* nStudent);
   void printHashTable();
@@ -23,6 +24,7 @@ class HashTable
  private:
   Node** hashData;
   int size;
+  int collision;
 };
 
 #endif

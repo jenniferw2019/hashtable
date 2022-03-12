@@ -133,7 +133,7 @@ int main()
   
   while (runProgram == true)
     {
-      cout << "Type ADD, PRINT, DELETE, RESIZE" << endl;
+      cout << "Type ADD, PRINT, DELETE, QUIT" << endl;
       cin.get(strInput, 10);
       cin.get();
 
@@ -167,8 +167,16 @@ int main()
 
 	      Node* studentNode = new Node(newStudent);
 	      myHashTable->insertHashTable(studentNode);
+	     
 	      //myHashTable->reHashTable();
 	    }
+	  //cout << myHashTable->getSize() << endl;
+	  while (myHashTable->getCollision() > 3)
+	    {
+	      myHashTable->reHashTable();
+	      cout << "hash table size has been doubled" << endl;
+	    }
+	  //cout << myHashTable->getSize() << endl;
 	}
       else if (strcmp(strInput, "PRINT") == 0)
 	{
@@ -182,9 +190,15 @@ int main()
 
 	  myHashTable->deleteHashTable(deleteID);
 	}
+      /*
       else if (strcmp(strInput, "RESIZE") == 0)
 	{
 	  myHashTable->reHashTable();
+	}
+      */
+      else if (strcmp(strInput, "QUIT") == 0)
+	{
+	  runProgram = false;
 	}
   
       }

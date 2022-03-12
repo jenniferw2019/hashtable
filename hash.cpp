@@ -9,6 +9,7 @@ using namespace std;
 HashTable::HashTable(int newSize)
 {
   size = newSize;
+  collision = 0;
   hashData = new Node*[newSize];
   for (int i = 0; i < newSize; i++)
     {
@@ -23,6 +24,10 @@ int HashTable::getSize()
 void HashTable::setSize(int addSize)
 {
   size = addSize;
+}
+int HashTable::getCollision()
+{
+  return collision;
 }
 
 int HashTable::hashValue(int newID)
@@ -44,6 +49,7 @@ void HashTable::insertHashTable(Node* nStudent)
       Node* temp = hashData[tempValue];
       hashData[tempValue] = nStudent;
       hashData[tempValue]->setNext(temp);
+      collision = collision + 1;
     }
 }
 
@@ -107,6 +113,7 @@ void HashTable::reHashTable()
   int oldsize = size;
   
   size = oldsize * 2;
+  collision = 0;
   hashData = new Node*[size];
   for (int i = 0; i < size; i++)
     {
