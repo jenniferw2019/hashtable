@@ -1,3 +1,4 @@
+//header file for node
 #ifndef NODE_H
 #define NODE_H
 #include <iostream>
@@ -17,6 +18,7 @@ class Node
   ~Node();
   
  private:
+  //variables
   Node* next;
   Student* student;  
 };

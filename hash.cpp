@@ -1,3 +1,4 @@
+//cpp file for hash
 #include <iostream>
 #include <cstring>
 #include "node.h"
@@ -36,6 +37,7 @@ int HashTable::hashValue(int newID)
   return index;
 }
 
+//insert student into hash table
 void HashTable::insertHashTable(Node* nStudent)
 {
   int tempID = (nStudent->getStudent())->getID();
@@ -53,6 +55,7 @@ void HashTable::insertHashTable(Node* nStudent)
     }
 }
 
+//print hash table
 void HashTable::printHashTable()
 {
   for (int i = 0; i < size; i++)
@@ -73,6 +76,7 @@ void HashTable::printHashTable()
     }
 }
 
+//delete student from hash table
 void HashTable::deleteHashTable(int searchID)
 {
   int tempv = hashValue(searchID);
@@ -107,6 +111,7 @@ void HashTable::deleteHashTable(int searchID)
     }
 }
 
+//rehash table
 void HashTable::reHashTable()
 {
   Node** oldHash = hashData;
@@ -121,8 +126,6 @@ void HashTable::reHashTable()
     }
   for (int i = 0; i < oldsize; i++)
     {
-      //Node* current = oldHash[i];
-      //Node* previous;
       
       if (oldHash[i] != NULL)
 	{
@@ -130,7 +133,7 @@ void HashTable::reHashTable()
 	  oldHash[i] = oldHash[i]->getNext();
 	  tempHead->setNext(NULL);
 	  insertHashTable(tempHead);
-	  //cout << (tempHead->getStudent())->getID() << endl;
+	  
 	  
 	  while (oldHash[i] != NULL)
 	    {
@@ -138,7 +141,7 @@ void HashTable::reHashTable()
 	      oldHash[i] = oldHash[i]->getNext();
 	      tempHead->setNext(NULL);
 	      insertHashTable(tempHead);
-	      //cout << (tempHead->getStudent())->getID() << endl;
+	      
 	    }
 	}
     }

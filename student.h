@@ -1,3 +1,4 @@
+//header for student
 #ifndef STUDENT_H
 #define STUDENT_H
 #include <iostream>
@@ -21,6 +22,7 @@ class Student
   ~Student();
 
  private:
+  //variables
   char firstName[50];
   char lastName[50];
   int id;

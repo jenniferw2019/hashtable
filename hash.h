@@ -1,3 +1,4 @@
+//header file for hash
 #ifndef HASH_H
 #define HASH_H
 #include <iostream>
@@ -22,6 +23,7 @@ class HashTable
   ~HashTable();
 
  private:
+  //variables
   Node** hashData;
   int size;
   int collision;
