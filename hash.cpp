@@ -147,4 +147,33 @@ void HashTable::reHashTable()
     }
 }
 
+int HashTable::searchID(int findID)
+{
+  int temp = hashValue(findID);
+  if (hashData[temp] != NULL)
+    {
+      Node* current = hashData[temp];
+      Node* previous;
+
+      if ((hashData[temp]->getStudent())->getID() == findID)
+	{
+	  return 1;
+	}
+      else
+	{
+	  while (current->getNext() != NULL)
+	    {
+	      previous = current;
+	      current = current->getNext();
+
+	      if ((current->getStudent())->getID() == findID)
+		{
+		  return 1;
+		}
+	    }
+	}
+    }
+  return 0;
+}
+
 HashTable::~HashTable() {}

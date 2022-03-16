@@ -20,6 +20,7 @@ class HashTable
   void printHashTable();
   void deleteHashTable(int searchID);
   void reHashTable();
+  int searchID(int findID);
   ~HashTable();
 
  private:

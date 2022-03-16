@@ -146,9 +146,14 @@ int main()
   int hashSize = 100;
   HashTable* myHashTable = new HashTable(hashSize);
   char strInput[10];
+  char strCommand[10];
   int students = 0;
   int tempID = 0;
   int deleteID = 0;
+  char newfirst[30];
+  char newlast[30];
+  int newid = 0;
+  float newgpa = 0;
   srand(time(NULL));
 
   /*
@@ -170,36 +175,90 @@ int main()
       //if user type ADD, prompt user to enter how many students. create students and add to hash table
       if (strcmp(strInput, "ADD") == 0)
 	{
-	  cout << "How many students? Enter an int value" << endl;
-	  cin >> students;
+	  //cout << "Do you want to manually add students, or randomly generate students?" << endl;
+	  cout << "Type MANUAL to manually add students. Type RANDOM to randomly generate students" << endl;
+	  cin.get(strCommand, 10);
 	  cin.get();
-	  
-	  for (int i = 0; i < students; i++)
+
+	  if (strcmp(strCommand, "MANUAL") == 0)
 	    {
-	      //cout << "LINE 143" << endl;
-	      Student* newStudent = new Student();
-	      int generateFirst = 0;
-	      int generateLast = 0;
-	      float generateGPA = 0;
+	      cout << "Enter first name" << endl;
+	      cin.get(newfirst, 30);
+	      cin.get();
+	      cout << "Enter last name" << endl;
+	      cin.get(newlast, 30);
 
-	      //generate students
-	      generateFirst = rand() % 12;
-	      generateLast = rand() % 12;
-	      generateGPA = ((float)rand()) / (float(RAND_MAX/4));
-	      tempID = tempID + 1;
-	      //cout << generateFirst << " " << generateLast << endl;
+	      cin.get();
+	      cout << "Enter id" << endl;
+	      cin >> newid;
 	      
-	      newStudent->setFirstName(tokenFirst[generateFirst]);
-	      newStudent->setLastName(tokenLast[generateLast]);
-	      newStudent->setID(tempID);
-	      newStudent->setGPA(generateGPA);
+	      /*
+	      int temp = 0;
+	      myHashTable->searchID(newid);
+	      if (temp == 0)
+		{
+		  cin.get();
+		}
+	      else if (temp == 1)
+		{
+		  cout << "There is already a student with this id" << endl;
+		  break;
+		}
+	      */
 
-	      //newStudent->displayStudent();
-	      //cout << endl;
-	      //insert to hash table
-	      Node* studentNode = new Node(newStudent);
-	      myHashTable->insertHashTable(studentNode);
-	     
+	      cout << "Enter gpa" << endl;
+	      cin >> newgpa;
+	      cin.get();
+
+	      Student* newstudent = new Student();
+	      newstudent->setFirstName(newfirst);
+	      newstudent->setLastName(newlast);
+	      newstudent->setID(newid);
+	      newstudent->setGPA(newgpa);
+	      Node* newnode = new Node(newstudent);
+
+	      int temp = myHashTable->searchID(newid);
+	      if (temp == 1)
+		{
+		  cout << "There is already a student with this id" << endl;
+		}
+	      else
+		{
+		  myHashTable->insertHashTable(newnode);
+		}
+	    }
+	  else if (strcmp(strCommand, "RANDOM") == 0)
+	    {
+	      cout << "How many students? Enter an int value" << endl;
+	      cin >> students;
+	      cin.get();
+	      
+	      for (int i = 0; i < students; i++)
+		{
+		  //cout << "LINE 143" << endl;
+		  Student* newStudent = new Student();
+		  int generateFirst = 0;
+		  int generateLast = 0;
+		  float generateGPA = 0;
+		  
+		  //generate students
+		  generateFirst = rand() % 12;
+		  generateLast = rand() % 12;
+		  generateGPA = ((float)rand()) / (float(RAND_MAX/4));
+		  tempID = tempID + 1;
+		  //cout << generateFirst << " " << generateLast << endl;
+		  
+		  newStudent->setFirstName(tokenFirst[generateFirst]);
+		  newStudent->setLastName(tokenLast[generateLast]);
+		  newStudent->setID(tempID);
+		  newStudent->setGPA(generateGPA);
+		  
+		  //newStudent->displayStudent();
+		  //cout << endl;
+		  //insert to hash table
+		  Node* studentNode = new Node(newStudent);
+		  myHashTable->insertHashTable(studentNode);
+		}
 	      
 	    }
 
